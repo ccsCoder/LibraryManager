@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import styled from 'styled-components';
+import ActionButton from '../ActionButton';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -21,16 +22,8 @@ const StyledInput = styled.input`
   color: ${(props) => props.theme.searchInput.color};
   border: ${(props) => props.theme.searchInput.border};
   height: ${(props) => props.theme.searchInput.height};
+  border-radius: 5px;
   flex: 2;
-`;
-
-const StyledButton = styled.button`
-  background: ${({ theme: { button } }) => button.background};
-  color: ${(props) => props.theme.buttonTextColor};
-  border: ${(props) => props.theme.button.border};
-  height: ${(props) => props.theme.button.minHeight};
-  max-width: ${(props) => props.theme.button.width};
-  flex: 1;
 `;
 
 export default function Search() {
@@ -42,7 +35,7 @@ export default function Search() {
         id="search-books"
         placeholder="Type book name to search"
       />
-      <StyledButton type="submit">Search</StyledButton>
+      <ActionButton type="submit" label="Search" />
     </StyledDiv>
   );
 }
