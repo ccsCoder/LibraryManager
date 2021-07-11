@@ -38,11 +38,15 @@
 
       #root {
         width: 100%;
-        display: grid;
-        grid-template-columns: 100%;
-        grid-template-rows: auto;
-        place-items: center;
-        gap: 24px;
+      }
+      .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
       }
     </style>
     <title>React App</title>
