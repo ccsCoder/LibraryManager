@@ -9,7 +9,7 @@ const theme = {
     background: '#263859',
     border: '1px solid #6B778D',
     color: '#FF6768',
-    minHeight: '30px',
+    minHeight: '25px',
     width: '80px',
   },
   label: {

@@ -4,38 +4,47 @@ import styled from 'styled-components';
 import ActionButton from '../ActionButton';
 
 const StyledDiv = styled.div`
-  display: flex;
-  width: 60%;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
 `;
 
-const StyledLabel = styled.label`
-  font-size: ${(props) => props.theme.label.fontSize};
-  flex: 1;
-  max-width: 100px;
+const SearchContainerDiv = styled.div`
+  width: 50%;
+  position: relative;
 `;
 
 const StyledInput = styled.input`
-  background: ${({ theme: { searchInput } }) => searchInput.background};
-  color: ${(props) => props.theme.searchInput.color};
-  border: ${(props) => props.theme.searchInput.border};
-  height: ${(props) => props.theme.searchInput.height};
-  border-radius: 5px;
+  outline: none;
+  background: transparent;
+  color: white;
+  border: 1px solid cyan;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  width: 100%;
+  height: 25px;
   flex: 2;
+
+  ::-webkit-search-cancel-button {
+    color: ${(props) => props.theme.text};
+  }
 `;
 
 export default function Search() {
   return (
-    <StyledDiv>
-      <StyledLabel htmlFor="search-books">Search books</StyledLabel>
+    <SearchContainerDiv>
+      <label className="visually-hidden" htmlFor="search-books">
+        Search books
+      </label>
       <StyledInput
         type="search"
         id="search-books"
         placeholder="Type book name to search"
       />
-      <ActionButton type="submit" label="Search" />
-    </StyledDiv>
+      <StyledDiv>
+        <ActionButton textButton type="submit" label="Search" />
+      </StyledDiv>
+    </SearchContainerDiv>
   );
 }
