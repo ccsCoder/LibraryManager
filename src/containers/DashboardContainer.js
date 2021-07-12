@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ActionButton from '../components/ActionButton';
-import Modal from '../components/Modal/Modal';
+import FabMenu from '../components/FabMenu';
 import Search from '../components/Search';
 import ShelvesContainer from './ShelvesContainer';
 
@@ -27,14 +27,9 @@ const CenteredSection = styled.section`
 `;
 
 export default function DashboardContainer() {
-  const [showAddBookDialog, setShowAddBookDialog] = useState(false);
+  const [fabMenuVisible, setFabMenuVisible] = useState(false);
   return (
     <>
-      <Modal isVisible={showAddBookDialog}>
-        <form>
-          <Search />
-        </form>
-      </Modal>
       <StyledHeader>
         <h1>Kitab Online</h1>
       </StyledHeader>
@@ -46,8 +41,9 @@ export default function DashboardContainer() {
         <ActionButton
           fab
           label="Add a new book"
-          onClicked={() => setShowAddBookDialog(true)}
+          onClicked={() => setFabMenuVisible(true)}
         />
+        <FabMenu visible={fabMenuVisible} />
       </StyledMain>
     </>
   );
