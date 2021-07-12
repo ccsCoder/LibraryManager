@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ActionButton from '../components/ActionButton';
 import FabMenu from '../components/FabMenu';
-import Search from '../components/Search';
 import ShelvesContainer from './ShelvesContainer';
+import SearchContainer from './SearchContainer';
 
 const StyledMain = styled.main`
   height: 100%;
@@ -35,7 +35,7 @@ export default function DashboardContainer() {
       </StyledHeader>
       <StyledMain>
         <CenteredSection>
-          <Search />
+          <SearchContainer />
         </CenteredSection>
         <ShelvesContainer />
         <ActionButton

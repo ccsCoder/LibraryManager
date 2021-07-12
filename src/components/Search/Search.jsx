@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { search } from '../../utils/bookservice';
 import ActionButton from '../ActionButton';
 
 const StyledDiv = styled.div`
@@ -32,6 +33,9 @@ const StyledInput = styled.input`
 `;
 
 export default function Search() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const searchResults = useSearchBook(searchTerm);
+
   return (
     <SearchContainerDiv>
       <label className="visually-hidden" htmlFor="search-books">
@@ -40,10 +44,16 @@ export default function Search() {
       <StyledInput
         type="search"
         id="search-books"
-        placeholder="Type book name to search"
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Title, Author. E.g Micro, Michael Chrichton"
       />
       <StyledDiv>
-        <ActionButton textButton type="submit" label="Search" />
+        <ActionButton
+          textButton
+          type="submit"
+          label="Search"
+          onClicked={searchBook}
+        />
       </StyledDiv>
     </SearchContainerDiv>
   );
