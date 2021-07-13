@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { search } from '../utils/bookservice';
 
-function searchBook(searchTerm) {
-  const [results, setResults] = useState({
+function useSearchBook(searchTerm) {
+  const [result, setResults] = useState({
     status: false,
   });
 
-  // console.log('Searching for: =', searchTerm);
   useEffect(() => {
     search(searchTerm).then((searchResults) => {
       console.log(searchResults);
@@ -14,7 +13,7 @@ function searchBook(searchTerm) {
     });
   }, [searchTerm]);
 
-  return results;
+  return result;
 }
 
-export default searchBook;
+export default useSearchBook;

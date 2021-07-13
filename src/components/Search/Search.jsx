@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { search } from '../../utils/bookservice';
 import ActionButton from '../ActionButton';
@@ -32,9 +32,18 @@ const StyledInput = styled.input`
   }
 `;
 
-export default function Search() {
+// eslint-disable-next-line react/prop-types
+export default function Search({ updateSearchResult }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const searchResults = useSearchBook(searchTerm);
+  const onSearchPerformed = useCallback(() => {
+    search(searchTerm).then((result) => {
+      updateSearchResult(result);
+    });
+  }, [searchTerm, updateSearchResult]);
+
+  const searchOnEnter = (e) => {
+    if (e.key === 'Enter') onSearchPerformed(e);
+  };
 
   return (
     <SearchContainerDiv>
@@ -45,6 +54,7 @@ export default function Search() {
         type="search"
         id="search-books"
         onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyUp={searchOnEnter}
         placeholder="Title, Author. E.g Micro, Michael Chrichton"
       />
       <StyledDiv>
@@ -52,7 +62,7 @@ export default function Search() {
           textButton
           type="submit"
           label="Search"
-          onClicked={searchBook}
+          onClicked={onSearchPerformed}
         />
       </StyledDiv>
     </SearchContainerDiv>
