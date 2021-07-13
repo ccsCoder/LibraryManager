@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
+import { search } from '../../utils/bookservice';
 import ActionButton from '../ActionButton';
 
 const StyledDiv = styled.div`
@@ -31,7 +32,19 @@ const StyledInput = styled.input`
   }
 `;
 
-export default function Search() {
+// eslint-disable-next-line react/prop-types
+export default function Search({ updateSearchResult }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const onSearchPerformed = useCallback(() => {
+    search(searchTerm).then((result) => {
+      updateSearchResult(result);
+    });
+  }, [searchTerm, updateSearchResult]);
+
+  const searchOnEnter = (e) => {
+    if (e.key === 'Enter') onSearchPerformed(e);
+  };
+
   return (
     <SearchContainerDiv>
       <label className="visually-hidden" htmlFor="search-books">
@@ -40,10 +53,17 @@ export default function Search() {
       <StyledInput
         type="search"
         id="search-books"
-        placeholder="Type book name to search"
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyUp={searchOnEnter}
+        placeholder="Title, Author. E.g Micro, Michael Chrichton"
       />
       <StyledDiv>
-        <ActionButton textButton type="submit" label="Search" />
+        <ActionButton
+          textButton
+          type="submit"
+          label="Search"
+          onClicked={onSearchPerformed}
+        />
       </StyledDiv>
     </SearchContainerDiv>
   );
